@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Gem Puzzle</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Iurii Pototskii">
+    <meta name="description" content="Gem Puzzle">
+
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body class="page">
+    <header class="page-header">
+      <div class="center-wrap">
+        <p class="moves">
+          Moves: <span class="moves-number"></span>
+        </p>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <div class="center-wrap">
+        <div class="game-board">
+          
+        </div>
+        <a href="index.html"><button type="button">Новая игра</button></a>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="center-wrap">
+        <p class="difficulties">
+          Choose your destiny: <a class="three" href="#">3x3</a> <a class="four" href="#">4x4</a> <a class="sixteen" href="#">16x16</a>
+        </p>
+    </div>
+    </footer>
+
+    <template id="cell">
+      <div class="game-board_cell"></div>
+    </template>
+
+    <script src="main.js" type="module"></script>
+  </body>
+
+</html>
