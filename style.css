@@ -1,0 +1,67 @@
+html {
+  height: 100%;
+}
+
+.page {
+  margin: 0;
+  padding: 0;
+  min-width: 768px;
+  height: 100%;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  align-content: start;
+
+  text-align: center;
+
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: black;
+  background-color: lightgrey;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+  nav-index: -1;
+}
+
+.center-wrap {
+  position: relative;
+  margin: 0 auto;
+  width: 768px;
+}
+
+.game-board {
+  height: 768px;
+  width: 768px;
+  margin-bottom: 20px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+
+  border: 2px solid grey;
+}
+
+.game-board div {
+  border: 1px solid grey;
+  padding-top: 45%;
+}
+
+.empty {
+  background-color: lightsalmon;
+}
+
+.not-empty {
+  background-color: lightskyblue;
+}
