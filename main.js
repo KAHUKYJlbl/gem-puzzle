@@ -95,13 +95,13 @@ function move(evt) {
     targetCell.textContent = '';
   }
 
-  function isWin () {
-    for (let i = 0; i < GAME_SIZE; i++) {
-      
-    }
-  }
+  // function isWin () {
+  //   for (let i = 0; i < GAME_SIZE; i++) {
 
-  if () {
-    gameBoard
-  }
+  //   }
+  // }
+
+  // if () {
+  //   gameBoard
+  // }
 }
