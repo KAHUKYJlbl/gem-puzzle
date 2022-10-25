@@ -65,3 +65,7 @@ html {
 .not-empty {
   background-color: lightskyblue;
 }
+
+.moves-number {
+  margin-right: 50px;
+}

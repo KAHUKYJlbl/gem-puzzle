@@ -132,11 +132,11 @@ function move(evt) {
 
     let firstEmptyWin = true;
     let lastEmptyWin = true;
-    for (let i = 1; i < GAME_SIZE; i++) {
-      if (+cells[i].textContent !== winArr[i]) {
+    for (let i = 0; i < GAME_SIZE - 1; i++) {
+      if (+cells[i + 1].textContent !== winArr[i]) {
         firstEmptyWin = false;
       }
-      if (+cells[i - 1].textContent !== winArr[i]) {
+      if (+cells[i].textContent !== winArr[i]) {
         lastEmptyWin = false;
       } 
     }
