@@ -38,12 +38,12 @@ html {
 .center-wrap {
   position: relative;
   margin: 0 auto;
-  width: 768px;
+  width: 612px;
 }
 
 .game-board {
-  height: 768px;
-  width: 768px;
+  height: 612px;
+  width: 612px;
   margin-bottom: 20px;
 
   display: grid;

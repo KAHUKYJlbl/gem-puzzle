@@ -95,13 +95,25 @@ function move(evt) {
     targetCell.textContent = '';
   }
 
-  // function isWin () {
-  //   for (let i = 0; i < GAME_SIZE; i++) {
+  function isWin () {
+    const winArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
-  //   }
-  // }
+    let firstEmptyWin = true;
+    let lastEmptyWin = true;
+    for (let i = 1; i < GAME_SIZE; i++) {
+      if (cells[i].textContent !== winArr[i]) {
+        firstEmptyWin = false;
+      }
+      if (cells[i - 1].textContent !== winArr[i]) {
+        lastEmptyWin = false;
+      } 
+    }
+    
 
-  // if () {
-  //   gameBoard
-  // }
+    return (firstEmptyWin || lastEmptyWin);
+  }
+
+  if (isWin()) {
+    alert('You win!');
+  }
 }
