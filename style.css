@@ -17,7 +17,7 @@ html {
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
-  color: black;
+  color: blue;
   background-color: lightgrey;
 }
 
@@ -51,11 +51,14 @@ html {
   grid-template-rows: repeat(4, 1fr);
 
   border: 2px solid grey;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .game-board div {
+  /* position: relative; */
   border: 1px solid grey;
-  padding-top: 45%;
+  padding-top: 40%;
   cursor: default;
 }
 
@@ -69,4 +72,8 @@ html {
 
 .moves-number {
   margin-right: 50px;
+}
+
+.animated {
+  transition: transform .3s;
 }
