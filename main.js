@@ -62,6 +62,8 @@ let moves = 0;
 
 // START
 
+document.querySelector('.new-game').addEventListener('click', startGame);
+
 function startGame () {
   clearInterval(gameTimer);
   time = 0;
