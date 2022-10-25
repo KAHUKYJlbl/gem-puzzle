@@ -88,10 +88,10 @@ const nineGame = document.querySelector('.nine')
 nineGame.addEventListener('click', () => {
   gameSize = 81;
   startGame();
-  gameBoard.style.backgroundImage = `url("minesweeper.jpg")`;
 
   function minesweeper() {
     gameBoard.innerHTML = '';
+    gameBoard.style.backgroundImage = `url("minesweeper.jpg")`;
     gameBoard.removeEventListener('click', minesweeper);
   }
 
