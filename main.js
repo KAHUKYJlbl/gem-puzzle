@@ -84,6 +84,18 @@ const movesDisplay = document.querySelector('.moves-number');
 let gameTimer;
 let moves = 0;
 
+const nineGame = document.querySelector('.nine')
+nineGame.addEventListener('click', () => {
+  gameSize = 81;
+  startGame();
+  gameBoard.style.backgroundImage = `url("minesweeper.jpg")`;
+
+  gameBoard.addEventListener('click', () => {
+    gameBoard.innerHTML = '';
+  });
+});
+
+
 // START
 
 document.querySelector('.new-game').addEventListener('click', startGame);
@@ -163,7 +175,7 @@ function move(evt) {
     return positionTargetCell === positionEmptyCell - Math.sqrt(gameSize);
   }
 
-  if ( isMoveUp() || isMoveDown() || (isMoveLeft() && !(isFirstColumn())) || (isMoveRight() && !(isLastColumn())) ) {
+  function hop () {
     emptyCell.classList.remove('empty');
     emptyCell.classList.add('not-empty');
     targetCell.classList.remove('not-empty');
@@ -172,6 +184,37 @@ function move(evt) {
     targetCell.textContent = '';
     moves++;
     movesDisplay.textContent = moves;
+    emptyCell.classList.remove('animated');
+    targetCell.classList.remove('animated');
+    targetCell.style.transform = '';
+    emptyCell.style.transform = '';
+    
+  }
+
+  if (isMoveUp()) {
+    emptyCell.classList.add('animated');
+    targetCell.classList.add('animated');
+    targetCell.style.transform = `translateY(${-384 / Math.sqrt(gameSize)}px)`;
+    emptyCell.style.transform = `translateY(${384 / Math.sqrt(gameSize)}px)`;
+    setTimeout(hop, 300);
+  } else if (isMoveDown()) {
+    emptyCell.classList.add('animated');
+    targetCell.classList.add('animated');
+    targetCell.style.transform = `translateY(${384 / Math.sqrt(gameSize)}px)`;
+    emptyCell.style.transform = `translateY(${-384 / Math.sqrt(gameSize)}px)`;
+    setTimeout(hop, 300);
+  } else if (isMoveLeft() && !(isFirstColumn())) {
+    emptyCell.classList.add('animated');
+    targetCell.classList.add('animated');
+    targetCell.style.transform = `translate(${-384 / Math.sqrt(gameSize)}px)`;
+    emptyCell.style.transform = `translate(${384 / Math.sqrt(gameSize)}px)`;
+    setTimeout(hop, 300);
+  } else if (isMoveRight() && !(isLastColumn())) {
+    emptyCell.classList.add('animated');
+    targetCell.classList.add('animated');
+    targetCell.style.transform = `translateX(${384 / Math.sqrt(gameSize)}px)`;
+    emptyCell.style.transform = `translateX(${-384 / Math.sqrt(gameSize)}px)`;
+    setTimeout(hop, 300);
   }
 
   function isWin () {
@@ -191,10 +234,14 @@ function move(evt) {
     return (firstEmptyWin || lastEmptyWin);
   }
 
-  if (isWin()) {
-    alert(`Hooray! You solved the puzzle in ${timerSpan.textContent} and ${moves} moves!`);
-    clearInterval(gameTimer);
+  function checkHooray() {
+    if (isWin()) {
+      alert(`Hooray! You solved the puzzle in ${timerSpan.textContent} and ${moves} moves!`);
+      clearInterval(gameTimer);
+    }
   }
+
+  setTimeout(checkHooray, 320);
 }
 
 startGame();
