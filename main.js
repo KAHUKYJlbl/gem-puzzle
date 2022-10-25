@@ -140,7 +140,7 @@ function move(evt) {
   }
 
   function isFirstColumn() {
-    return (positionTargetCell === 0 || positionTargetCell === Math.sqrt(gameSize) || positionTargetCell === Math.sqrt(gameSize) * 2 || positionTargetCell === Math.sqrt(gameSize) * 3);
+    return (positionTargetCell === 0 || positionTargetCell === Math.sqrt(gameSize) || positionTargetCell === Math.sqrt(gameSize) * 2 || positionTargetCell === Math.sqrt(gameSize) * 3 || positionTargetCell === Math.sqrt(gameSize) * 4 || positionTargetCell === Math.sqrt(gameSize) * 5 || positionTargetCell === Math.sqrt(gameSize) * 6 || positionTargetCell === Math.sqrt(gameSize) * 7);
   }
 
   function isMoveLeft () {
@@ -148,7 +148,7 @@ function move(evt) {
   }
 
   function isLastColumn () {
-    return (positionTargetCell === Math.sqrt(gameSize) - 1 || positionTargetCell === Math.sqrt(gameSize) * 2 - 1 || positionTargetCell === Math.sqrt(gameSize) * 3 - 1 || positionTargetCell === Math.sqrt(gameSize) * 4 - 1);
+    return (positionTargetCell === Math.sqrt(gameSize) - 1 || positionTargetCell === Math.sqrt(gameSize) * 2 - 1 || positionTargetCell === Math.sqrt(gameSize) * 3 - 1 || positionTargetCell === Math.sqrt(gameSize) * 4 - 1 || positionTargetCell === Math.sqrt(gameSize) * 5 - 1 || positionTargetCell === Math.sqrt(gameSize) * 6 - 1 || positionTargetCell === Math.sqrt(gameSize) * 7 - 1 || positionTargetCell === Math.sqrt(gameSize) * 8 - 1);
   }
 
   function isMoveRight () {
