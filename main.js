@@ -35,10 +35,17 @@ const cellTemplate = document.querySelector('#cell')
   .content
   .querySelector('div');
 const getRandomCellNumber = getUniqValue(getRandomInt, 1, GAME_SIZE - 1);
+const movesDisplay = document.querySelector('.moves-number');
+
+let moves = 0;
+movesDisplay.textContent = moves;
 
 for (let i = 0; i < GAME_SIZE; i++) {
   const cloneCell = cellTemplate.cloneNode(true);
   cloneCell.addEventListener('click', move);
+  if (i == 1 || i == 4) {
+    cloneCell.addEventListener('click', newTimer);
+  }
 
   if (i === 0) {
     cloneCell.classList.add('empty');
@@ -52,6 +59,25 @@ for (let i = 0; i < GAME_SIZE; i++) {
 
 gameBoard.append(checkersFragment);
 
+const timerSpan = document.querySelector('.timer');
+timerSpan.textContent = '00:00';
+let gameTimer;
+
+function newTimer (evt) {
+  let time = 0;
+  let minutes = 0;
+  let seconds = 0;
+
+  function plusSecond() {
+    timerSpan.textContent = `${(minutes < 10 ? '0' + minutes : minutes)}:${(seconds < 10 ? '0' + seconds : seconds)}`;
+    time++;
+    minutes = Math.floor(time / 60);
+    seconds = time % 60;
+  }
+
+  gameTimer = setInterval(plusSecond, 1000);
+}
+
 // GAME
 
 const cells = Array.from(gameBoard.children);
@@ -61,6 +87,10 @@ function move(evt) {
   const positionTargetCell = cells.indexOf(targetCell);
   const emptyCell = gameBoard.querySelector('.empty');
   const positionEmptyCell = cells.indexOf(emptyCell);
+
+  if (gameTimer) {
+    evt.target.removeEventListener('click', newTimer);
+  }
 
   function isFirstColumn() {
     return (positionTargetCell === 0 || positionTargetCell === 4 || positionTargetCell === 8 || positionTargetCell === 12);
@@ -93,6 +123,8 @@ function move(evt) {
     targetCell.classList.add('empty');
     emptyCell.textContent = targetCell.textContent;
     targetCell.textContent = '';
+    moves++;
+    movesDisplay.textContent = moves;
   }
 
   function isWin () {
@@ -113,6 +145,7 @@ function move(evt) {
   }
 
   if (isWin()) {
-    alert('You win!');
+    alert(`Hooray! You solved the puzzle in ${timerSpan.textContent} and ${moves} moves!`);
+    clearInterval(gameTimer);
   }
 }
