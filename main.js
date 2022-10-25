@@ -90,9 +90,12 @@ nineGame.addEventListener('click', () => {
   startGame();
   gameBoard.style.backgroundImage = `url("minesweeper.jpg")`;
 
-  gameBoard.addEventListener('click', () => {
+  function minesweeper() {
     gameBoard.innerHTML = '';
-  });
+    gameBoard.removeEventListener('click', minesweeper);
+  }
+
+  gameBoard.addEventListener('click', minesweeper);
 });
 
 
@@ -101,6 +104,7 @@ nineGame.addEventListener('click', () => {
 document.querySelector('.new-game').addEventListener('click', startGame);
 
 function startGame () {
+  gameBoard.style.backgroundImage = '';
   clearInterval(gameTimer);
   time = 0;
   moves = 0;
