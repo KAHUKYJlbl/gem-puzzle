@@ -41,16 +41,40 @@ function newTimer (evt) {
 }
 
 let gameSize = 16;
-const nineGame = document.querySelector('.three');
-nineGame.addEventListener('click', () => {
+const threeGame = document.querySelector('.three');
+threeGame.addEventListener('click', () => {
   gameSize = 9;
 
   startGame();
 });
 
-const sixteenGame = document.querySelector('.four')
-sixteenGame.addEventListener('click', () => {
+const fourGame = document.querySelector('.four')
+fourGame.addEventListener('click', () => {
   gameSize = 16;
+  startGame();
+});
+
+const sixGame = document.querySelector('.six')
+sixGame.addEventListener('click', () => {
+  gameSize = 36;
+  startGame();
+});
+
+const sevenGame = document.querySelector('.seven')
+sevenGame.addEventListener('click', () => {
+  gameSize = 49;
+  startGame();
+});
+
+const eightGame = document.querySelector('.eight')
+eightGame.addEventListener('click', () => {
+  gameSize = 64;
+  startGame();
+});
+
+const fiveGame = document.querySelector('.five')
+fiveGame.addEventListener('click', () => {
+  gameSize = 25;
   startGame();
 });
 
