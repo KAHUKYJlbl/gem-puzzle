@@ -1,5 +1,4 @@
 // UTILS
-const GAME_SIZE = 16;
 
 function getRandomInt(x, y) {
   if (Number.isFinite(x) && Number.isFinite(y) && x >= 0 && y >= 0) {
@@ -26,44 +25,98 @@ function getUniqValue (fn, ...args) {
     return value;
   };
 }
+let time = 0;
+function newTimer (evt) {
+  let minutes = 0;
+  let seconds = 0;
+
+  function plusSecond() {
+    timerSpan.textContent = `${(minutes < 10 ? '0' + minutes : minutes)}:${(seconds < 10 ? '0' + seconds : seconds)}`;
+    time++;
+    minutes = Math.floor(time / 60);
+    seconds = time % 60;
+  }
+
+  gameTimer = setInterval(plusSecond, 1000);
+}
+
+let gameSize = 16;
+const nineGame = document.querySelector('.three');
+nineGame.addEventListener('click', () => {
+  gameSize = 9;
+
+  startGame();
+});
+
+const sixteenGame = document.querySelector('.four')
+sixteenGame.addEventListener('click', () => {
+  gameSize = 16;
+  startGame();
+});
+
+const timerSpan = document.querySelector('.timer');
+const gameBoard = document.querySelector('.game-board');
+const movesDisplay = document.querySelector('.moves-number');
+let gameTimer;
+let moves = 0;
 
 // START
 
-const gameBoard = document.querySelector('.game-board');
-const checkersFragment = document.createDocumentFragment();
-const cellTemplate = document.querySelector('#cell')
-  .content
-  .querySelector('div');
-const getRandomCellNumber = getUniqValue(getRandomInt, 1, GAME_SIZE - 1);
+document.querySelector('.new-game').addEventListener('click', startGame);
 
-for (let i = 0; i < GAME_SIZE; i++) {
-  const cloneCell = cellTemplate.cloneNode(true);
-  cloneCell.addEventListener('click', move);
+function startGame () {
+  clearInterval(gameTimer);
+  time = 0;
+  moves = 0;
 
-  if (i === 0) {
-    cloneCell.classList.add('empty');
-  } else {
-    cloneCell.classList.add('not-empty');
-    cloneCell.textContent = getRandomCellNumber();
+  const checkersFragment = document.createDocumentFragment();
+  const cellTemplate = document.querySelector('#cell')
+    .content
+    .querySelector('div');
+  const getRandomCellNumber = getUniqValue(getRandomInt, 1, gameSize - 1);
+
+  movesDisplay.textContent = moves;
+
+  for (let i = 0; i < gameSize; i++) {
+    const cloneCell = cellTemplate.cloneNode(true);
+    cloneCell.addEventListener('click', move);
+    if (i == 1 || i == Math.sqrt(gameSize)) {
+      cloneCell.addEventListener('click', newTimer);
+    }
+
+    if (i === 0) {
+      cloneCell.classList.add('empty');
+    } else {
+      cloneCell.classList.add('not-empty');
+      cloneCell.textContent = getRandomCellNumber();
+    }
+    
+    checkersFragment.append(cloneCell);
   }
-  
-  checkersFragment.append(cloneCell);
-}
 
-gameBoard.append(checkersFragment);
+  gameBoard.innerHTML = '';
+  gameBoard.style.gridTemplateColumns = `repeat(${Math.sqrt(gameSize)}, 1fr)`;
+  gameBoard.style.gridTemplateRows = `repeat(${Math.sqrt(gameSize)}, 1fr)`;
+  gameBoard.append(checkersFragment);
+
+  timerSpan.textContent = '00:00';
+}
 
 // GAME
 
-const cells = Array.from(gameBoard.children);
-
 function move(evt) {
+  const cells = Array.from(gameBoard.children);
   const targetCell = evt.currentTarget
   const positionTargetCell = cells.indexOf(targetCell);
   const emptyCell = gameBoard.querySelector('.empty');
   const positionEmptyCell = cells.indexOf(emptyCell);
 
+  if (time > 0) {
+    evt.target.removeEventListener('click', newTimer);
+  }
+
   function isFirstColumn() {
-    return (positionTargetCell === 0 || positionTargetCell === 4 || positionTargetCell === 8 || positionTargetCell === 12);
+    return (positionTargetCell === 0 || positionTargetCell === Math.sqrt(gameSize) || positionTargetCell === Math.sqrt(gameSize) * 2 || positionTargetCell === Math.sqrt(gameSize) * 3);
   }
 
   function isMoveLeft () {
@@ -71,7 +124,7 @@ function move(evt) {
   }
 
   function isLastColumn () {
-    return (positionTargetCell === 3 || positionTargetCell === 7 || positionTargetCell === 11 || positionTargetCell === 15);
+    return (positionTargetCell === Math.sqrt(gameSize) - 1 || positionTargetCell === Math.sqrt(gameSize) * 2 - 1 || positionTargetCell === Math.sqrt(gameSize) * 3 - 1 || positionTargetCell === Math.sqrt(gameSize) * 4 - 1);
   }
 
   function isMoveRight () {
@@ -79,11 +132,11 @@ function move(evt) {
   }
 
   function isMoveUp () {
-    return positionTargetCell === positionEmptyCell + 4;
+    return positionTargetCell === positionEmptyCell + Math.sqrt(gameSize);
   }
 
   function isMoveDown () {
-    return positionTargetCell === positionEmptyCell - 4;
+    return positionTargetCell === positionEmptyCell - Math.sqrt(gameSize);
   }
 
   if ( isMoveUp() || isMoveDown() || (isMoveLeft() && !(isFirstColumn())) || (isMoveRight() && !(isLastColumn())) ) {
@@ -93,6 +146,8 @@ function move(evt) {
     targetCell.classList.add('empty');
     emptyCell.textContent = targetCell.textContent;
     targetCell.textContent = '';
+    moves++;
+    movesDisplay.textContent = moves;
   }
 
   function isWin () {
@@ -100,11 +155,11 @@ function move(evt) {
 
     let firstEmptyWin = true;
     let lastEmptyWin = true;
-    for (let i = 1; i < GAME_SIZE; i++) {
-      if (+cells[i].textContent !== winArr[i]) {
+    for (let i = 0; i < gameSize - 1; i++) {
+      if (+cells[i + 1].textContent !== winArr[i]) {
         firstEmptyWin = false;
       }
-      if (+cells[i - 1].textContent !== winArr[i]) {
+      if (+cells[i].textContent !== winArr[i]) {
         lastEmptyWin = false;
       } 
     }
@@ -113,6 +168,9 @@ function move(evt) {
   }
 
   if (isWin()) {
-    alert('You win!');
+    alert(`Hooray! You solved the puzzle in ${timerSpan.textContent} and ${moves} moves!`);
+    clearInterval(gameTimer);
   }
 }
+
+startGame();

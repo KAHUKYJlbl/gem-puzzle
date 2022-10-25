@@ -38,12 +38,12 @@ html {
 .center-wrap {
   position: relative;
   margin: 0 auto;
-  width: 612px;
+  width: 384px;
 }
 
 .game-board {
-  height: 612px;
-  width: 612px;
+  height: 384px;
+  width: 384px;
   margin-bottom: 20px;
 
   display: grid;
@@ -64,4 +64,8 @@ html {
 
 .not-empty {
   background-color: lightskyblue;
+}
+
+.moves-number {
+  margin-right: 50px;
 }
