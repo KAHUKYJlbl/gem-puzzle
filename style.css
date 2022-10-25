@@ -44,30 +44,35 @@ html {
 .game-board {
   height: 384px;
   width: 384px;
+  padding: 1px;
   margin-bottom: 20px;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
+  gap: 1px;
 
-  border: 2px solid grey;
+  border: 2px solid salmon;
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: lightsalmon;
 }
 
 .game-board div {
-  /* position: relative; */
-  border: 1px solid grey;
   padding-top: 40%;
   cursor: default;
 }
 
 .empty {
   background-color: lightsalmon;
+  /* border: 1px solid grey;
+  transition: border 5s; */
 }
 
 .not-empty {
   background-color: lightskyblue;
+  /* border: 1px solid grey; */
+  z-index: 2;
 }
 
 .moves-number {

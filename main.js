@@ -192,30 +192,34 @@ function move(evt) {
     targetCell.classList.remove('animated');
     targetCell.style.transform = '';
     emptyCell.style.transform = '';
-    
+    // emptyCell.style.border = '1px solid grey';
   }
 
   if (isMoveUp()) {
     emptyCell.classList.add('animated');
     targetCell.classList.add('animated');
+    // emptyCell.style.border = 'none';
     targetCell.style.transform = `translateY(${-384 / Math.sqrt(gameSize)}px)`;
     emptyCell.style.transform = `translateY(${384 / Math.sqrt(gameSize)}px)`;
     setTimeout(hop, 300);
   } else if (isMoveDown()) {
     emptyCell.classList.add('animated');
     targetCell.classList.add('animated');
+    // emptyCell.style.border = 'none';
     targetCell.style.transform = `translateY(${384 / Math.sqrt(gameSize)}px)`;
     emptyCell.style.transform = `translateY(${-384 / Math.sqrt(gameSize)}px)`;
     setTimeout(hop, 300);
   } else if (isMoveLeft() && !(isFirstColumn())) {
     emptyCell.classList.add('animated');
     targetCell.classList.add('animated');
+    // emptyCell.style.border = 'none';
     targetCell.style.transform = `translate(${-384 / Math.sqrt(gameSize)}px)`;
     emptyCell.style.transform = `translate(${384 / Math.sqrt(gameSize)}px)`;
     setTimeout(hop, 300);
   } else if (isMoveRight() && !(isLastColumn())) {
     emptyCell.classList.add('animated');
     targetCell.classList.add('animated');
+    // emptyCell.style.border = 'none';
     targetCell.style.transform = `translateX(${384 / Math.sqrt(gameSize)}px)`;
     emptyCell.style.transform = `translateX(${-384 / Math.sqrt(gameSize)}px)`;
     setTimeout(hop, 300);
